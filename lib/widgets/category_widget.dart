@@ -20,7 +20,7 @@ class CategoryWidget extends StatelessWidget {
         Get.to(()=>CatageryPage(cat: cat));
       },
       child: SizedBox(
-        height: 90,
+        height: 60,
               width: 90,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,

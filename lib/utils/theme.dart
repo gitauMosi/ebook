@@ -6,7 +6,9 @@ class AppThemes {
     brightness: Brightness.light,
     primaryColor: AppColor.secondary,
     scaffoldBackgroundColor: Colors.white,
-    
+    appBarTheme: AppBarTheme(
+      backgroundColor: AppColor.secondary
+    ),
     textTheme: const TextTheme(
       bodyLarge: TextStyle(color: Colors.black),
       bodyMedium: TextStyle(color: Colors.black54),

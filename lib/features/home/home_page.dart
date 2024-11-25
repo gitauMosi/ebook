@@ -10,73 +10,57 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           'EraBook',
           style: TextStyle(fontSize: 25),
         ),
         actions: [
-          IconButton(icon: Icon(Icons.search), onPressed: () {}),
+          IconButton(icon: const Icon(Icons.search), onPressed: () {}),
           IconButton(
-              icon: Icon(Icons.notifications_outlined), onPressed: () {}),
+              icon: const Icon(Icons.notifications_outlined), onPressed: () {}),
         ],
       ),
       body: SingleChildScrollView(
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            // Featured Books Section
+            _buildSectionTitle("Featured Books", () {}),
             SizedBox(
-              width: MediaQuery.of(context).size.width,
-              height: 230,
+              height: 210,
               child: ListView.builder(
                 itemCount: sampleBooks.length,
-                shrinkWrap: true,
-                padding: EdgeInsets.only(top: 2, right: 3, left: 5),
+                padding: const EdgeInsets.only(top: 2, right: 3, left: 5),
                 scrollDirection: Axis.horizontal,
                 itemBuilder: (context, index) =>
                     CustomPostWidget(book: sampleBooks[index]),
               ),
             ),
-            SizedBox(height: 10,),
-            Padding(
-              padding: const EdgeInsets.only(left: 5.0),
-              child: Row(
-                children: [
-                  Text("Explore by Genre", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
-                  Spacer(),
-                  IconButton(onPressed: (){}, icon: Icon(Icons.arrow_right_alt, size: 20, color: Colors.amber,))
-                ],
-              ),
-            ),
-             SizedBox(
-              width: MediaQuery.of(context).size.width,
-              height: 90,
+            //const SizedBox(height: 10),
+
+            // Explore by Genre Section
+            _buildSectionTitle("Explore by Genre", () {}),
+            SizedBox(
+              height: 70,
               child: ListView.builder(
                 itemCount: sampleCategories.length,
-                shrinkWrap: true,
-                padding: EdgeInsets.only(top: 2, right: 3, left: 5),
+                padding: const EdgeInsets.only(top: 2, right: 3, left: 5),
                 scrollDirection: Axis.horizontal,
-                itemBuilder: (context, index) =>
-                    CategoryWidget(cat: sampleCategories[index],)
+                itemBuilder: (context, index) => CategoryWidget(
+                  cat: sampleCategories[index],
+                ),
               ),
             ),
-            SizedBox(height: 10,),
-            Padding(
-              padding: const EdgeInsets.only(left: 5.0),
-              child: Row(
-                children: [
-                  Text("Recommended for you", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
-                  Spacer(),
-                  IconButton(onPressed: (){}, icon: Icon(Icons.arrow_right_alt, size: 20, color: Colors.amber,))
-                ],
-              ),
-            ),
-             SizedBox(
-              width: MediaQuery.of(context).size.width,
-              height: 230,
+            //const SizedBox(height: 10),
+
+            // Recommended Section
+            _buildSectionTitle("Recommended for You", () {}),
+            SizedBox(
+              height: 210,
               child: ListView.builder(
                 itemCount: sampleBooks.length,
-                shrinkWrap: true,
-                reverse: true,
-                padding: EdgeInsets.only(top: 2, right: 3, left: 5),
+                reverse: true, // Reverse for visual differentiation
+                padding: const EdgeInsets.only(top: 2, right: 3, left: 5),
                 scrollDirection: Axis.horizontal,
                 itemBuilder: (context, index) =>
                     CustomPostWidget(book: sampleBooks[index]),
@@ -84,6 +68,30 @@ class HomePage extends StatelessWidget {
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  // Helper Widget for Section Title
+  Widget _buildSectionTitle(String title, VoidCallback onTap) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 5.0, vertical: 5.0),
+      child: Row(
+        children: [
+          Text(
+            title,
+            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+          ),
+          const Spacer(),
+          IconButton(
+            onPressed: onTap,
+            icon: const Icon(
+              Icons.arrow_right_alt,
+              size: 20,
+              color: Colors.amber,
+            ),
+          )
+        ],
       ),
     );
   }

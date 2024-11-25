@@ -4,9 +4,9 @@ import 'package:get/get.dart';
 import '../../controllers/theme_controller.dart';
 
 class ProfilePage extends StatelessWidget {
-   ProfilePage({super.key});
+  ProfilePage({super.key});
 
-  final ThemeController themeController  = Get.find();
+  final ThemeController themeController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -27,28 +27,7 @@ class ProfilePage extends StatelessWidget {
               const SizedBox(
                 height: 10,
               ),
-              Column(
-                //crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Container(
-                    height: 100,
-                    width: 100,
-                    decoration: BoxDecoration(
-                        shape: BoxShape.circle, color: Colors.grey[300]),
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  const Text(
-                    "Mosi Git",
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                  const SizedBox(
-                    height: 5,
-                  ),
-                  const Text("Author")
-                ],
-              ),
+              customHeader(),
               const SizedBox(
                 height: 30,
               ),
@@ -62,12 +41,13 @@ class ProfilePage extends StatelessWidget {
                 leading: Icon(Icons.mail_outline),
                 title: Text("mosi@gmail.com"),
               ),
-              Obx(()=> SwitchListTile(
-                contentPadding: EdgeInsets.all(0),
-                value: themeController.isDarkMode.value, 
-                title: Text(themeController.isDarkMode.value ? "Light Mode" : "Dark Mode"),
-                onChanged: themeController.toggleTheme
-                )),
+              Obx(() => SwitchListTile(
+                  contentPadding: const EdgeInsets.all(0),
+                  value: themeController.isDarkMode.value,
+                  title: Text(themeController.isDarkMode.value
+                      ? "Light Mode"
+                      : "Dark Mode"),
+                  onChanged: themeController.toggleTheme)),
               const SizedBox(
                 height: 30,
               ),
@@ -77,6 +57,36 @@ class ProfilePage extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+
+  Column customHeader() {
+    return Column(
+      //crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Container(
+          height: 100,
+          width: 100,
+          decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: Colors.grey[300],
+              image: const DecorationImage(
+                  image: NetworkImage(
+                      "https://www.shutterstock.com/image-photo/profile-picture-smiling-young-african-260nw-1873784920.jpg"),
+                  fit: BoxFit.cover)),
+        ),
+        const SizedBox(
+          height: 10,
+        ),
+        const Text(
+          "Mosi Git",
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
+        const SizedBox(
+          height: 5,
+        ),
+        const Text("Author")
+      ],
     );
   }
 
@@ -91,8 +101,8 @@ class ProfilePage extends StatelessWidget {
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(16),
             color: Theme.of(context).primaryColor
-             //color: Colors.grey[300],
-             ),
+            //color: Colors.grey[300],
+            ),
         child: Row(
           children: [
             Padding(
